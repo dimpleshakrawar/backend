@@ -54,7 +54,7 @@ userSchema.pre("save", async function (next) {
   //including next means to move ahead in code, here it will change password everytime user edit anthing from userschema so applying condition
   if (!this.isModified("password")) return next();
 
-  this.password = bcrypt.hash(this.password, 10);
+  this.password = await bcrypt.hash(this.password, 10);
   next();
 });
 
