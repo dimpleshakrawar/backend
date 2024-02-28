@@ -19,7 +19,13 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 //to store images or pdf publicly
 app.use(express.static("public"));
 
-//to access cookies from server to browser and vice versa
+//to access cookies from server and store in client browser and vice versa
 app.use(cookieParser());
 
+//routes import
+
+import userRouter from "./routes/user.routes.js";
+
+//routes declaration
+app.use("/api/v1/users", userRouter);
 export { app };
