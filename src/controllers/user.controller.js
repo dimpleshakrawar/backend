@@ -3,6 +3,7 @@ import { ApiError } from "../utlis/ApiError.js";
 import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utlis/cloudinary.js";
 import { ApiResponse } from "../utlis/ApiResponse.js";
+import jwt from "jsonwebtoken";
 
 const generateAccessAndRefreshToken = async (userId) => {
   try {
