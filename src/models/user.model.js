@@ -51,10 +51,10 @@ const userSchema = new Schema(
 
 //works as middleware , pre is hook which acts as middleware
 userSchema.pre("save", async function (next) {
-  //including next means to move ahead in code, here it will change password everytime user edit anthing from userschema so applying condition
+  //including next means to move ahead in code, so it will change password everytime user edit anything from userschema so applying condition
   if (!this.isModified("password")) return next();
 
-  this.password = await bcrypt.hash(this.password, 10);
+  this.password = bcrypt.hash(this.password, 10);
   next();
 });
 
@@ -79,15 +79,14 @@ userSchema.methods.generateAccessToken = function () {
     }
   );
 };
-
 userSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     {
       _id: this._id,
     },
-    process.env.REFRESH_TOKEN_SECRET,
+    process.env.ACCESS_TOKEN_SECRET,
     {
-      expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
     }
   );
 };
